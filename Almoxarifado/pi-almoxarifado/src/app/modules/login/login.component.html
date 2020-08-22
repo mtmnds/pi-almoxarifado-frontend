@@ -1,0 +1,30 @@
+<div class="container-fluid p-0 h-100 w-100">
+    <div class="row h-100 w-100 justify-content-center align-items-center">
+
+        <div id="form-container" class="col-12 col-xl-6">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="loginForm" (ngSubmit)="login()">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email:</label>
+                            <input id="email" type="email" class="form-control" placeholder="" formControlName="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="senha" class="form-label">Senha:</label>
+                            <input id="senha" type="password" class="form-control" placeholder="" formControlName="senha" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" formControlName="lembrar">
+                                <span class="custom-control-label">Lembrar-me</span>
+                            </label>
+                        </div>
+                        <div class="row mt-3 mb-3"></div>
+                        <button type="submit" class="btn btn-pill btn-primary w-100">Acessar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
