@@ -2,3 +2,21 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.sidebar {
+    background-color: indigo;
+    height: 100%;
+    width: 250px;
+}
+
+.main {
+    height: 100%;
+    width: calc(100% - 250px);
+}
