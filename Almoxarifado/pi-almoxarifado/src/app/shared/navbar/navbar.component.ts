@@ -19,7 +19,15 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  public usuario = {};
+  public usuario = {
+    nome: "Matheus Mendes"
+  };
+
+
+  toggleSidebar() {
+    var sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("show");
+  }
 
 
 }
