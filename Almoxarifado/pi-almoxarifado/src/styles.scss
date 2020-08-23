@@ -41,6 +41,8 @@ body {
 
 .main .card {
     margin: 15px;
+    max-height: calc(100% - 80px);
+    overflow: auto;
 }
 
 
