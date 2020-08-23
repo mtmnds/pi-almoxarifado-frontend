@@ -19,6 +19,8 @@ import { FornecedorComponent } from './modules/cadastros/fornecedor/fornecedor.c
 import { LocalEstoqueComponent } from './modules/cadastros/local-estoque/local-estoque.component';
 import { UsuarioComponent } from './modules/cadastros/usuario/usuario.component';
 import { PerfilComponent } from './modules/cadastros/perfil/perfil.component';
+import { AcessoComponent } from './modules/cadastros/acesso/acesso.component';
+import { MenuComponent } from './modules/cadastros/menu/menu.component';
 
 
 const routes: Routes = [
@@ -54,7 +56,9 @@ const routes: Routes = [
   { path: "fornecedor", component: FornecedorComponent },
   { path: "local-estoque", component: LocalEstoqueComponent },
   { path: "usuario", component: UsuarioComponent },
-  { path: "perfil", component: PerfilComponent }
+  { path: "perfil", component: PerfilComponent },
+  { path: "acesso", component: AcessoComponent },
+  { path: "menu", component: MenuComponent }
 
 ];
 
