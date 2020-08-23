@@ -2,3 +2,27 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.sidebar {
+    background-color: indigo;
+    display: none;
+    height: 100%;
+    transition: 0.3s;
+    width: 300px;
+}
+
+.show {
+    display: block;
+}
+
+.main {
+    height: 100%;
+    width: 100%;
+}
