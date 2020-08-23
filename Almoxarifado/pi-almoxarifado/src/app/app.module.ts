@@ -8,13 +8,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IconsModule } from './shared/icons/icons.module';
 import { LoginComponent } from './modules/login/login.component';
 import { IndexComponent } from './modules/index/index.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    IndexComponent
+    IndexComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
