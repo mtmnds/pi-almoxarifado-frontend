@@ -26,8 +26,6 @@ import { ModeloComponent } from './modules/cadastros/modelo/modelo.component';
 import { FornecedorComponent } from './modules/cadastros/fornecedor/fornecedor.component';
 import { LocalEstoqueComponent } from './modules/cadastros/local-estoque/local-estoque.component';
 import { UsuarioComponent } from './modules/cadastros/usuario/usuario.component';
-import { PerfilComponent } from './modules/cadastros/perfil/perfil.component';
-import { AcessoComponent } from './modules/cadastros/acesso/acesso.component';
 import { MenuComponent } from './modules/cadastros/menu/menu.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -56,8 +54,6 @@ import { MatTableModule } from '@angular/material/table';
     FornecedorComponent,
     LocalEstoqueComponent,
     UsuarioComponent,
-    PerfilComponent,
-    AcessoComponent,
     MenuComponent
   ],
   imports: [
