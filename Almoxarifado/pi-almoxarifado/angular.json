@@ -183,5 +183,8 @@
       }
     }
   },
-  "defaultProject": "pi-almoxarifado"
+  "defaultProject": "pi-almoxarifado",
+  "cli": {
+    "analytics": "210b83f4-33ca-4296-9bc2-240e343ab309"
+  }
 }
