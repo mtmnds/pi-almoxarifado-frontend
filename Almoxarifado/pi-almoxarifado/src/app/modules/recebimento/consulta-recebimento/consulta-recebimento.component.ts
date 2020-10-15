@@ -161,7 +161,7 @@ export class ConsultaRecebimentoComponent implements OnInit {
 
   public filtrarPorNumero(numero: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.numero.toString().includes(filter);
+      return data.numero.toString().toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = numero;
@@ -170,7 +170,7 @@ export class ConsultaRecebimentoComponent implements OnInit {
 
   public filtrarPorSerie(serie: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.serie.toString().includes(filter);
+      return data.serie.toString().toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = serie;
@@ -179,7 +179,7 @@ export class ConsultaRecebimentoComponent implements OnInit {
 
   public filtrarPorDataRecebimento(dataRecebimento: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.dataRecebimento.includes(filter);
+      return data.dataRecebimento.toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = dataRecebimento.trim().toLocaleLowerCase();
@@ -188,7 +188,7 @@ export class ConsultaRecebimentoComponent implements OnInit {
 
   public filtrarPorMaterial(material: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.material.nome.includes(filter) || data.material.codigo.includes(filter);
+      return data.material.nome.toLocaleLowerCase().includes(filter) || data.material.codigo.toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = material.trim().toLocaleLowerCase();
@@ -197,7 +197,7 @@ export class ConsultaRecebimentoComponent implements OnInit {
 
   public filtrarPorFornecedor(fornecedor: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.fornecedor.nome.includes(filter) || data.fornecedor.cpfCnpj.includes(filter);
+      return data.fornecedor.nome.toLocaleLowerCase().includes(filter) || data.fornecedor.cpfCnpj.toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = fornecedor.trim().toLocaleLowerCase();

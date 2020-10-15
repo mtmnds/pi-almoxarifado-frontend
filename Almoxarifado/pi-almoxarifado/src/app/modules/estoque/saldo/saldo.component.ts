@@ -73,7 +73,7 @@ export class SaldoComponent implements OnInit {
 
   public filtrarPorCodigo(codigo: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.codigo.includes(filter);
+      return data.codigo.toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = codigo.trim().toLocaleLowerCase();
@@ -82,7 +82,7 @@ export class SaldoComponent implements OnInit {
 
   public filtrarPorNome(nome: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.nome.includes(filter);
+      return data.nome.toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = nome.trim().toLocaleLowerCase();

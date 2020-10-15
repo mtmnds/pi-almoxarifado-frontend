@@ -83,7 +83,7 @@ export class ConsultaMovimentacaoComponent implements OnInit {
 
   public filtrarPorMaterial(material: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.material.nome.includes(filter) || data.material.codigo.includes(filter);
+      return data.material.nome.toLocaleLowerCase().includes(filter) || data.material.codigo.toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = material.trim().toLocaleLowerCase();
@@ -92,7 +92,7 @@ export class ConsultaMovimentacaoComponent implements OnInit {
 
   public filtrarPorLocalOrigem(local: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.localOrigem.toString().includes(filter);
+      return data.localOrigem.toLocaleLowerCase().toString().includes(filter);
     };
 
     this.dataSource.filter = local.trim().toLocaleLowerCase();
@@ -101,7 +101,7 @@ export class ConsultaMovimentacaoComponent implements OnInit {
 
   public filtrarPorLocalDestino(local: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.localDestino.includes(filter);
+      return data.localDestino.toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = local.trim().toLocaleLowerCase();
@@ -110,7 +110,7 @@ export class ConsultaMovimentacaoComponent implements OnInit {
 
   public filtrarPorDataMovimentacao(dataMovimentacao: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.dataMovimentacao.includes(filter);
+      return data.dataMovimentacao.toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = dataMovimentacao.trim().toLocaleLowerCase();
@@ -128,7 +128,7 @@ export class ConsultaMovimentacaoComponent implements OnInit {
 
   public filtrarPorUsuario(usuario: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.usuario.nome.includes(filter) || data.usuario.cpfCnpj.includes(filter);
+      return data.usuario.nome.toLocaleLowerCase().includes(filter) || data.usuario.cpfCnpj.toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = usuario.trim().toLocaleLowerCase();
