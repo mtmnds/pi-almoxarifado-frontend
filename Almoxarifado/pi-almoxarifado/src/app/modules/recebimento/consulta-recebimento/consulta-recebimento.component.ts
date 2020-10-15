@@ -215,9 +215,8 @@ export interface PeriodicElement {
     cpfCnpj: string
   },
   material: {
-      codigo: string,
-      nome: string,
-      quantidade: number
+    codigo: string,
+    nome: string,
+    quantidade: number
   }
 }
-
