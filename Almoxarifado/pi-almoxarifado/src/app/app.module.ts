@@ -3,13 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IconsModule } from './shared/icons/icons.module';
-import { LoginComponent } from './modules/geral/login/login.component';
-import { IndexComponent } from './modules/geral/index/index.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { IconsModule } from './shared/modules/icons/icons.module';
+import { LoginComponent } from './core/login/login.component';
+import { NavbarComponent } from './shared/modules/navbar/navbar.component';
+import { IndexComponent } from './core/index/index.component';
+import { SidebarComponent } from './shared/modules/sidebar/sidebar.component';
 import { SaldoComponent } from './modules/estoque/saldo/saldo.component';
 import { RecebimentoComponent } from './modules/recebimento/recebimento/recebimento.component';
 import { ConsultaRecebimentoComponent } from './modules/recebimento/consulta-recebimento/consulta-recebimento.component';
@@ -26,19 +25,20 @@ import { ModeloComponent } from './modules/cadastros/modelo/modelo.component';
 import { FornecedorComponent } from './modules/cadastros/fornecedor/fornecedor.component';
 import { LocalEstoqueComponent } from './modules/cadastros/local-estoque/local-estoque.component';
 import { UsuarioComponent } from './modules/cadastros/usuario/usuario.component';
-import { MenuComponent } from './modules/cadastros/menu/menu.component';
+import { HttpClientModule } from '@angular/common/http';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    SidebarComponent,
     IndexComponent,
     NavbarComponent,
-    SidebarComponent,
+    LoginComponent,
     SaldoComponent,
     RecebimentoComponent,
     ConsultaRecebimentoComponent,
@@ -54,16 +54,15 @@ import { HttpClientModule } from '@angular/common/http';
     ModeloComponent,
     FornecedorComponent,
     LocalEstoqueComponent,
-    UsuarioComponent,
-    MenuComponent
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
     IconsModule,
+    BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
     HttpClientModule
