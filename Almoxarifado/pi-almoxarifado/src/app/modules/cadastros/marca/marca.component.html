@@ -18,26 +18,25 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col text-right">
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                                    data-target="#cadastroDeMarca">
+                                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#cadastroDeMarca">
                                     Nova marca
                                 </button>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <form>
+                            <div class="form-group">
+                                <label for="filtroNome">Nome:</label>
+                                <input type="text" class="form-control" id="filtroNome" (keyup)="filtrarPorNome($event.target.value)"/>
+                            </div>
+                        </form>
+                    </div>
 
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        <input class="w-50" type="text" (keyup)="filtrarPorNome($event.target.value)"
-                                            placeholder="Nome">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="row">
                             <div class="col">
 

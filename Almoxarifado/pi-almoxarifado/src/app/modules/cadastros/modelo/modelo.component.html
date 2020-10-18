@@ -10,32 +10,65 @@
 
                 <div class="row mb-2 mb-xl-3">
                     <div class="col-auto d-none d-sm-block">
-                        <h3>Cadastro de modelos</h3>
+                        <h3>Cadastro de modelo</h3>
                     </div>
                 </div>
 
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#cadastroDeModelo" (click)="carregarDados()">
+                                    Novo modelo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="card">
+                    <div class="card-header">
+                        <form>
+                            <div class="form-group">
+                                <label for="filtroNome">Nome:</label>
+                                <input type="text" class="form-control" id="filtroNome" (keyup)="filtrarPorNome($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="filtroMarca">Marca:</label>
+                                <input type="text" class="form-control" id="filtroMarca" (keyup)="filtrarPorMarca($event.target.value)"/>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-body">
                         <div class="row">
                             <div class="col">
 
                                 <div>
                                     <table mat-table [dataSource]="dataSource" class="w-100">
                                         <ng-container matColumnDef="descricao">
-                                            <th mat-header-cell *matHeaderCellDef>Descrição</th>
-                                            <td mat-cell *matCellDef="let element">{{ element.descricao }}</td>
+                                            <th mat-header-cell *matHeaderCellDef>Nome</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.nome }}</td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="marca">
                                             <th mat-header-cell *matHeaderCellDef>Marca</th>
-                                            <td mat-cell *matCellDef="let element">{{ element.marca }}</td>
+                                            <td mat-cell *matCellDef="let element">{{ element.marca.nome }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="alterar">
+                                            <th mat-header-cell *matHeaderCellDef>Alterar</th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <i-feather class="align-middle" name="edit-2" (click)="alterar(element)"
+                                                    data-toggle="modal" data-target="#cadastroDeModelo"></i-feather>
+                                            </td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="remover">
                                             <th mat-header-cell *matHeaderCellDef>Remover</th>
                                             <td mat-cell *matCellDef="let element">
-                                                <i-feather class="align-middle" name="trash"></i-feather>
+                                                <i-feather class="align-middle" name="trash"
+                                                    (click)="desativar(element.id)"></i-feather>
                                             </td>
                                         </ng-container>
 
@@ -50,6 +83,47 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="cadastroDeModelo" tabindex="-1" role="dialog"
+                    aria-labelledby="modalCadastroDeModelo" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalCadastroDeModelo">Cadastrar novo modelo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                    id="fecharModal">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <form [formGroup]="cadastroModeloForm" (ngSubmit)="cadastrarOuAlterar()">
+                                <div class="modal-body">
+                                    <div class="form-group" formGroupName="marca">
+                                        <label for="marcaModelo">* Marca:</label>
+                                        <select class="form-control" id="marcaModelo" formControlName="id" required>
+                                            <option selected></option>
+                                            <option *ngFor="let marca of marcas" value="{{ marca.id }}">{{ marca.nome }}</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="nomeModelo">* Nome do modelo:</label>
+                                        <input type="text" class="form-control" id="nomeModelo" formControlName="nome" required />
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-secondary" data-dismiss="modal"
+                                        (click)="this.resetForm()">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </main>
 

@@ -1,4 +1,4 @@
-<div class="wrapper">
+<!-- <div class="wrapper">
 
     <app-sidebar></app-sidebar>
 
@@ -60,6 +60,178 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </main>
+
+    </div>
+
+</div> -->
+
+
+
+
+
+
+
+<div class="wrapper">
+
+    <app-sidebar></app-sidebar>
+
+    <div class="main">
+        <app-navbar></app-navbar>
+
+        <main class="content">
+            <div class="container-fluid p-0">
+
+                <div class="row mb-2 mb-xl-3">
+                    <div class="col-auto d-none d-sm-block">
+                        <h3>Cadastro de materiais</h3>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#cadastroDeMaterial" (click)="carregarDados()">
+                                    Novo material
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <form>
+                            <div class="form-group">
+                                <label for="filtroNome">Código:</label>
+                                <input type="text" class="form-control" id="filtroCodigo" (keyup)="filtrarPorCodigo($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="filtroMarca">Nome:</label>
+                                <input type="text" class="form-control" id="filtroNome" (keyup)="filtrarPorNome($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="filtroNome">Marca:</label>
+                                <input type="text" class="form-control" id="filtroMarca" (keyup)="filtrarPorMarca($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="filtroMarca">Modelo:</label>
+                                <input type="text" class="form-control" id="filtroModelo" (keyup)="filtrarPorModelo($event.target.value)"/>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+
+                                <div>
+                                    <table mat-table [dataSource]="dataSource" class="w-100">
+                                        <ng-container matColumnDef="codigo">
+                                            <th mat-header-cell *matHeaderCellDef>Código</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.codigo }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="nome">
+                                            <th mat-header-cell *matHeaderCellDef>Nome</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.nome }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="marca">
+                                            <th mat-header-cell *matHeaderCellDef>Marca</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.modelo.marca.nome }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="modelo">
+                                            <th mat-header-cell *matHeaderCellDef>Modelo</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.modelo.nome }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="alterar">
+                                            <th mat-header-cell *matHeaderCellDef>Alterar</th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <i-feather class="align-middle" name="edit-2" (click)="alterar(element)"
+                                                    data-toggle="modal" data-target="#cadastroDeMaterial"></i-feather>
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="remover">
+                                            <th mat-header-cell *matHeaderCellDef>Remover</th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <i-feather class="align-middle" name="trash"
+                                                    (click)="desativar(element.id)"></i-feather>
+                                            </td>
+                                        </ng-container>
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                    </table>
+
+                                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="cadastroDeMaterial" tabindex="-1" role="dialog"
+                    aria-labelledby="modalCadastroDeMaterial" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalCadastroDeMaterial">Cadastrar novo modelo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                    id="fecharModal">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <form [formGroup]="cadastroMaterialForm" (ngSubmit)="cadastrarOuAlterar()">
+                                <div class="modal-body">
+                                    <div formGroupName="modelo">
+                                        <div class="form-group" formGroupName="marca">
+                                            <label for="marcaModelo">* Marca:</label>
+                                            <select class="form-control" id="marcaModelo" formControlName="id" required (change)="filtrarModelos($event.target.value)">
+                                                <option selected></option>
+                                                <option *ngFor="let marca of marcas" value="{{ marca.id }}">{{ marca.nome }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" formGroupName="modelo">
+                                        <label for="modeloMaterial">* Modelo:</label>
+                                        <select class="form-control" id="modeloMaterial" formControlName="id" required>
+                                            <option selected></option>
+                                            <option *ngFor="let modelo of modelosFiltrados" value="{{ modelo.id }}">{{ modelo.nome }}</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="codigoMaterial">* Código do material:</label>
+                                        <input type="text" class="form-control" id="codigoMaterial" formControlName="codigo" required />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="nomeMaterial">* Descrição do material:</label>
+                                        <input type="text" class="form-control" id="nomeMaterial" formControlName="nome" required />
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-secondary" data-dismiss="modal"
+                                        (click)="this.resetForm()">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </main>
 
