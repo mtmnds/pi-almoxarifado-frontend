@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*!
+ * AdminKit v1.0.2 (https://adminkit.io/)
+ * Copyright 2020 Paul Laros
+ * Copyright 2020 AdminKit
+ * Licensed under MIT (https://github.com/adminkit/adminkit/blob/master/LICENSE)
+ */
+
+// Variables
+@import "app/scss/1-variables/fonts";
+@import "app/scss/1-variables/variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// Theme mixins
+@import "app/scss/2-mixins/button";
+@import "app/scss/2-mixins/modal";
+@import "app/scss/2-mixins/switch";
+
+// Theme components
+@import "app/scss/3-components/accordion";
+@import "app/scss/3-components/alert";
+@import "app/scss/3-components/avatar";
+@import "app/scss/3-components/buttons";
+@import "app/scss/3-components/card";
+@import "app/scss/3-components/chart";
+@import "app/scss/3-components/content";
+@import "app/scss/3-components/dropdown";
+@import "app/scss/3-components/feather";
+@import "app/scss/3-components/footer";
+@import "app/scss/3-components/forms";
+@import "app/scss/3-components/hamburger";
+@import "app/scss/3-components/list-group";
+@import "app/scss/3-components/main";
+@import "app/scss/3-components/modal";
+@import "app/scss/3-components/navbar";
+@import "app/scss/3-components/progress";
+@import "app/scss/3-components/reboot";
+@import "app/scss/3-components/sidebar";
+@import "app/scss/3-components/sizing";
+@import "app/scss/3-components/tables";
+@import "app/scss/3-components/type";
+@import "app/scss/3-components/wrapper";
+
+// Theme utilities
+@import "app/scss/4-utilities/background";
+@import "app/scss/4-utilities/borders";
+@import "app/scss/4-utilities/cursors";
+@import "app/scss/4-utilities/overflow";
+
+// 3rd party plugins
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~jvectormap-next/jquery-jvectormap";
+@import "~simplebar/dist/simplebar";
+@import "~tempusdominus-bootstrap-4/src/sass/tempusdominus-bootstrap-4";
+
+// 3rd party plugin styles
+@import "app/scss/5-vendor/datetimepicker";
+@import "app/scss/5-vendor/simplebar";
