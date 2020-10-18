@@ -14,7 +14,7 @@ export class ModeloComponent implements OnInit {
 
   public modelos;
   public marcas;
-  public displayedColumns: string[] = ["descricao", "marca", "alterar", "remover"];
+  public displayedColumns: string[] = ["nome", "marca", "alterar", "remover"];
   public dataSource;
   public cadastroModeloForm: FormGroup;
   

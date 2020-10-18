@@ -5,9 +5,9 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class PerfilAcessoService {
 
-  private urlBase = `${ environment.urlBase }/usuario`;
+  private urlBase = `${ environment.urlBase }/perfil`;
 
   constructor(
     private http: HttpClient
@@ -32,5 +32,5 @@ export class UsuarioService {
   public listarTodos() {   
     return this.http.get(this.urlBase);
   }
-
+  
 }
