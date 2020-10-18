@@ -6,10 +6,26 @@
         <app-navbar></app-navbar>
 
         <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Saldo de estoque</h5>
+            </div>
+
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <h5 class="card-title">Saldo de estoque</h5>
+                        <div class="row">
+                            <div class="col">
+                                <input class="w-100" type="text" (keyup)="filtrarPorCodigo($event.target.value)" placeholder="Código">
+                            </div>
+        
+                            <div class="col">
+                                <input class="w-100" type="text" (keyup)="filtrarPorNome($event.target.value)" placeholder="Nome">
+                            </div>
+        
+                            <div class="col">
+                                <input class="w-100" type="text" (keyup)="filtrarPorQuantidade($event.target.value)" placeholder="Quantidade">
+                            </div>
+                        </div>
                     </div>
                 </div>
 

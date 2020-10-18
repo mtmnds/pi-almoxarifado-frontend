@@ -35,12 +35,12 @@ export class SaldoComponent implements OnInit {
         quantidade: 0
       },
       {
-        codigo: "2",
+        codigo: "276534",
         nome: "Teste",
         marca: "Marca 2",
         modelo: "Modelo 2",
         local: "abc123",
-        quantidade: 0
+        quantidade: 3
       },
       {
         codigo: "3",
@@ -48,15 +48,15 @@ export class SaldoComponent implements OnInit {
         marca: "Marca 3",
         modelo: "Modelo 3",
         local: "abc123",
-        quantidade: 0
+        quantidade: 8
       },
       {
         codigo: "4",
-        nome: "Teste",
+        nome: "Teste abc",
         marca: "Marca 4",
         modelo: "Modelo 4",
         local: "abc123",
-        quantidade: 0
+        quantidade: 8
       }
     ];
 
@@ -68,6 +68,33 @@ export class SaldoComponent implements OnInit {
   private renderTable() {
     this.dataSource = new MatTableDataSource<PeriodicElement>(this.estoque);
     this.table.renderRows();
+  }
+
+
+  public filtrarPorCodigo(codigo: string) {
+    this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
+      return data.codigo.toLocaleLowerCase().includes(filter);
+    };
+
+    this.dataSource.filter = codigo.trim().toLocaleLowerCase();
+  }
+
+
+  public filtrarPorNome(nome: string) {
+    this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
+      return data.nome.toLocaleLowerCase().includes(filter);
+    };
+
+    this.dataSource.filter = nome.trim().toLocaleLowerCase();
+  }
+
+
+  public filtrarPorQuantidade(quantidade: number) {
+    this.dataSource.filterPredicate = (data: PeriodicElement, filter: number) => {
+      return data.quantidade == filter;
+    };
+
+    this.dataSource.filter = quantidade;
   }
 
 }

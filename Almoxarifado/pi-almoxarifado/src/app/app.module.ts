@@ -29,6 +29,7 @@ import { UsuarioComponent } from './modules/cadastros/usuario/usuario.component'
 import { MenuComponent } from './modules/cadastros/menu/menu.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { MatTableModule } from '@angular/material/table';
     ReactiveFormsModule,
     IconsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
