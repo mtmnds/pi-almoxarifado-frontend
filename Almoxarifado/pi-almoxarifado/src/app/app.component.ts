@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'pi-almoxarifado';
-
   icons = [
     {name: "activity"},
     {name: "airplay"},
@@ -294,4 +291,5 @@ export class AppComponent {
     {name: "zoom-out"}
   ]
 
+  title = 'pi-almoxarifado';
 }

@@ -57,23 +57,17 @@ export class MarcaComponent implements OnInit {
     if (this.cadastroMarcaForm.valid) {
       if (this.cadastroMarcaForm.get("id").value) {
         this.marcaService.alterar(this.cadastroMarcaForm.value).subscribe(res => {
-          console.log("Sucesso: ", res);
           this.listarTodos();
           this.resetForm();
           this.dismissModal();
-        }, err => {
-          console.log("Erro: ", err)
-        });
+        }, err => {});
       }
       else {
         this.marcaService.cadastrar(this.cadastroMarcaForm.value).subscribe(res => {
-          console.log("Sucesso: ", res);
           this.listarTodos();
           this.resetForm();
           this.dismissModal();
-        }, err => {
-          console.log("Erro: ", err)
-        });
+        }, err => {});
       }
     }
   }
@@ -88,20 +82,13 @@ export class MarcaComponent implements OnInit {
 
   public desativar(id: number) {
     this.marcaService.desativar(id).subscribe(res => {
-      console.log("Sucesso: ", res);
       this.listarTodos();
-    }, err => {
-      console.log("Erro: ", err)
-    });
+    }, err => {});
   }
 
 
   public buscar(id: number) {
-    this.marcaService.buscar(id).subscribe(res => {
-      console.log("Sucesso: ", res);
-    }, err => {
-      console.log("Erro: ", err)
-    });
+    this.marcaService.buscar(id).subscribe(res => {}, err => {});
   }
 
 

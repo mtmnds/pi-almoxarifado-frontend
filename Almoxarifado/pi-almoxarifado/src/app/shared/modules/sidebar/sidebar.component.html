@@ -1,0 +1,83 @@
+<nav id="sidebar" class="sidebar">
+    <div class="sidebar-content js-simplebar">
+        <a class="sidebar-brand" href="index">
+            <span class="align-middle">PiAlmoxarifado</span>
+        </a>
+
+        <ul class="sidebar-nav">
+            <li class="sidebar-header">
+                PiAlmoxarifado
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="index">
+                    <i-feather class="align-middle" name="sliders"></i-feather><span class="align-middle">Página inicial</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" data-toggle="collapse" class="sidebar-link collapsed" (click)="toggleMenuItem('menu-estoque')">
+                    <i-feather class="align-middle" name="briefcase"></i-feather><span class="align-middle">Estoque</span>
+                </a>
+                <ul id="menu-estoque" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="saldo">Saldo de estoque</a></li>
+                </ul>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" data-toggle="collapse" class="sidebar-link collapsed" (click)="toggleMenuItem('menu-recebimento')">
+                    <i-feather class="align-middle" name="briefcase"></i-feather><span class="align-middle">Recebimento</span>
+                </a>
+                <ul id="menu-recebimento" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="recebimento">Recebimento de materiais</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="consulta-recebimento">Consulta de notas fiscais recebidas</a></li>
+                </ul>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" data-toggle="collapse" class="sidebar-link collapsed" (click)="toggleMenuItem('menu-movimentacao')">
+                    <i-feather class="align-middle" name="briefcase"></i-feather><span class="align-middle">Movimentação</span>
+                </a>
+                <ul id="menu-movimentacao" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="movimentacao">Movimentação de saldo</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="consulta-movimentacao">Consulta de movimentações</a></li>
+                </ul>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" data-toggle="collapse" class="sidebar-link collapsed" (click)="toggleMenuItem('menu-requisicao')">
+                    <i-feather class="align-middle" name="briefcase"></i-feather><span class="align-middle">Requisições</span>
+                </a>
+                <ul id="menu-requisicao" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="criar-requisicao">Criar requisição</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="consulta-requisicao">Consulta de requisições</a></li>
+                </ul>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" data-toggle="collapse" class="sidebar-link collapsed" (click)="toggleMenuItem('menu-inventario')">
+                    <i-feather class="align-middle" name="briefcase"></i-feather><span class="align-middle">Inventários</span>
+                </a>
+                <ul id="menu-inventario" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="acompanhamento-inventario">Acompanhamento de inventários</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="inventario">Criar inventário</a></li>
+                </ul>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" data-toggle="collapse" class="sidebar-link collapsed" (click)="toggleMenuItem('menu-cadastro')">
+                    <i-feather class="align-middle" name="briefcase"></i-feather><span class="align-middle">Cadastros</span>
+                </a>
+                <ul id="menu-cadastro" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="material">Material</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="marca">Marca</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="modelo">Modelo</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="fornecedor">Fornecedor</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="local-estoque">Local de estoque</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="usuario">Usuário</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</nav>

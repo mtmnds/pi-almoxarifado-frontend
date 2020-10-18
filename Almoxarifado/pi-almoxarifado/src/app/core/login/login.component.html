@@ -1,0 +1,41 @@
+<div class="wrapper">
+    <div class="main">
+        <main class="content">
+            <div class="container-fluid p-0 h-100 w-100">
+                <div class="row h-100 w-100 justify-content-center align-items-center">
+
+                    <div id="form-container" class="col-12 col-xl-6">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h5 class="card-title mb-0">PiAlmoxarifado</h5>
+                            </div>
+                            <div class="card-body">
+                                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                                    <div class="form-group">
+                                        <label class="form-label">Email:</label>
+                                        <input type="email" class="form-control" formControlName="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Senha:</label>
+                                        <input type="password" class="form-control" formControlName="password" required>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" formControlName="remember">
+                                            <span class="custom-control-label">Remember</span>
+                                        </label>
+                                    </div>
+                                    <div class="row mt-3 mb-3"></div>
+                                    <h6 class="card-subtitle text-muted">Don't have an account? <a href="#">Sign up here</a>.</h6> -->
+                                    <div class="row mt-3 mb-3"></div>
+                                    <button type="submit" class="btn btn-pill btn-primary w-100">Acessar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
