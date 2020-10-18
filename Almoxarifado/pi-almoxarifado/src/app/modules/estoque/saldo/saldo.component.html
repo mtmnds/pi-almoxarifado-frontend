@@ -2,80 +2,93 @@
 
     <app-sidebar></app-sidebar>
 
-    <main class="main">
+    <div class="main">
         <app-navbar></app-navbar>
 
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">Saldo de estoque</h5>
-            </div>
+        <main class="content">
+            <div class="container-fluid p-0">
 
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
+                <div class="row mb-2 mb-xl-3">
+                    <div class="col-auto d-none d-sm-block">
+                        <h3>Saldo de estoque</h3>
+                    </div>
+                </div>
+
+                <div class="card">
+
+                    <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <input class="w-100" type="text" (keyup)="filtrarPorCodigo($event.target.value)" placeholder="Código">
+                                <div class="row">
+                                    <div class="col">
+                                        <input class="w-100" type="text" (keyup)="filtrarPorCodigo($event.target.value)"
+                                            placeholder="Código">
+                                    </div>
+
+                                    <div class="col">
+                                        <input class="w-100" type="text" (keyup)="filtrarPorNome($event.target.value)"
+                                            placeholder="Nome">
+                                    </div>
+
+                                    <div class="col">
+                                        <input class="w-100" type="text"
+                                            (keyup)="filtrarPorQuantidade($event.target.value)"
+                                            placeholder="Quantidade">
+                                    </div>
+                                </div>
                             </div>
-        
+                        </div>
+
+                        <div class="row">
                             <div class="col">
-                                <input class="w-100" type="text" (keyup)="filtrarPorNome($event.target.value)" placeholder="Nome">
-                            </div>
-        
-                            <div class="col">
-                                <input class="w-100" type="text" (keyup)="filtrarPorQuantidade($event.target.value)" placeholder="Quantidade">
+
+                                <div>
+                                    <table mat-table [dataSource]="dataSource" class="w-100">
+                                        <ng-container matColumnDef="codigo">
+                                            <th mat-header-cell *matHeaderCellDef>Código</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.codigo }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="nome">
+                                            <th mat-header-cell *matHeaderCellDef>Nome</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.nome }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="marca">
+                                            <th mat-header-cell *matHeaderCellDef>Marca</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.marca }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="modelo">
+                                            <th mat-header-cell *matHeaderCellDef>Modelo</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.modelo }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="local">
+                                            <th mat-header-cell *matHeaderCellDef>Local</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.local }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="quantidade">
+                                            <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.quantidade }}</td>
+                                        </ng-container>
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                    </table>
+
+                                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col">
-
-                        <div>
-                            <table mat-table [dataSource]="dataSource" class="w-100">                                
-                                <ng-container matColumnDef="codigo">
-                                    <th mat-header-cell *matHeaderCellDef>Código</th>
-                                    <td mat-cell *matCellDef="let element">{{ element.codigo }}</td>
-                                </ng-container>
-
-                                <ng-container matColumnDef="nome">
-                                    <th mat-header-cell *matHeaderCellDef>Nome</th>
-                                    <td mat-cell *matCellDef="let element">{{ element.nome }}</td>
-                                </ng-container>
-
-                                <ng-container matColumnDef="marca">
-                                    <th mat-header-cell *matHeaderCellDef>Marca</th>
-                                    <td mat-cell *matCellDef="let element">{{ element.marca }}</td>
-                                </ng-container>
-
-                                <ng-container matColumnDef="modelo">
-                                    <th mat-header-cell *matHeaderCellDef>Modelo</th>
-                                    <td mat-cell *matCellDef="let element">{{ element.modelo }}</td>
-                                </ng-container>
-
-                                <ng-container matColumnDef="local">
-                                    <th mat-header-cell *matHeaderCellDef>Local</th>
-                                    <td mat-cell *matCellDef="let element">{{ element.local }}</td>
-                                </ng-container>
-
-                                <ng-container matColumnDef="quantidade">
-                                    <th mat-header-cell *matHeaderCellDef>Quantidade</th>
-                                    <td mat-cell *matCellDef="let element">{{ element.quantidade }}</td>
-                                </ng-container>
-
-                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                            </table>
-
-                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-                        </div>
-
-                    </div>
-                </div>
             </div>
-        </div>
+        </main>
 
-    </main>
+    </div>
 
 </div>
