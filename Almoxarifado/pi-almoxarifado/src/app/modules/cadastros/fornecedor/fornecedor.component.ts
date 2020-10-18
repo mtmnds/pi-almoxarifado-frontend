@@ -13,7 +13,7 @@ import { FornecedorService } from './fornecedor.service';
 export class FornecedorComponent implements OnInit {
 
   public fornecedores;
-  public displayedColumns: string[] = ["codigo", "nome", "cpfCnpj", "endereco", "telefone", "celular", "email", "alterar", "remover"];
+  public displayedColumns: string[] = ["codigo", "nome", "cpfCnpj", "endereco", "telefone", "celular", "email", /*"alterar",*/ "remover"];
   public dataSource;
   public cadastroFornecedorForm: FormGroup;
 
