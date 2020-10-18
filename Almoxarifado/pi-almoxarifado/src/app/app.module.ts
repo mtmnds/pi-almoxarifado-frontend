@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { PerfilAcessoComponent } from './modules/cadastros/usuario/perfil-acesso/perfil-acesso.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { MatTableModule } from '@angular/material/table';
     ModeloComponent,
     FornecedorComponent,
     LocalEstoqueComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    PerfilAcessoComponent
   ],
   imports: [
     BrowserModule,

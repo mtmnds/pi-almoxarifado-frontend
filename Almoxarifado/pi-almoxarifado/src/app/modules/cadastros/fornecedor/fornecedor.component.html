@@ -10,32 +10,102 @@
 
                 <div class="row mb-2 mb-xl-3">
                     <div class="col-auto d-none d-sm-block">
-                        <h3>Cadastro de fornecedores</h3>
+                        <h3>Cadastro de fornecedor</h3>
                     </div>
                 </div>
 
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#cadastroDeFornecedor">
+                                    Novo fornecedor
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="card">
+                    <div class="card-header">
+                        <form>
+                            <div class="form-group">
+                                <label for="filtroCodigo">Código:</label>
+                                <input type="text" class="form-control" id="filtroCodigo" (keyup)="filtrarPorCodigo($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="filtroNome">Nome:</label>
+                                <input type="text" class="form-control" id="filtroNome" (keyup)="filtrarPorNome($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="filtroCpfCnpj">CPF/CNPJ:</label>
+                                <input type="text" class="form-control" id="filtroCpfCnpj" (keyup)="filtrarPorCpfCnpj($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="filtroEndereco">Endereço:</label>
+                                <input type="text" class="form-control" id="filtroEndereco" (keyup)="filtrarPorEndereco($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="filtroContato">Contato:</label>
+                                <input type="text" class="form-control" id="filtroContato" (keyup)="filtrarPorContato($event.target.value)"/>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-body">
                         <div class="row">
                             <div class="col">
 
                                 <div>
                                     <table mat-table [dataSource]="dataSource" class="w-100">
+                                        <ng-container matColumnDef="codigo">
+                                            <th mat-header-cell *matHeaderCellDef>Código</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="nome">
+                                            <th mat-header-cell *matHeaderCellDef>Nome</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.nome }}</td>
+                                        </ng-container>
+
                                         <ng-container matColumnDef="cpfCnpj">
                                             <th mat-header-cell *matHeaderCellDef>CPF/CNPJ</th>
                                             <td mat-cell *matCellDef="let element">{{ element.cpfCnpj }}</td>
                                         </ng-container>
 
-                                        <ng-container matColumnDef="nome">
-                                            <th mat-header-cell *matHeaderCellDef>Menu</th>
-                                            <td mat-cell *matCellDef="let element">{{ element.nome }}</td>
+                                        <ng-container matColumnDef="endereco">
+                                            <th mat-header-cell *matHeaderCellDef>Endereço</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.endereco }}</td>
                                         </ng-container>
+
+                                        <ng-container matColumnDef="telefone">
+                                            <th mat-header-cell *matHeaderCellDef>Telefone</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.telefone }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="celular">
+                                            <th mat-header-cell *matHeaderCellDef>Celular</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.celular }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="email">
+                                            <th mat-header-cell *matHeaderCellDef>Email</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+                                        </ng-container>
+
+                                        <!-- <ng-container matColumnDef="alterar">
+                                            <th mat-header-cell *matHeaderCellDef>Alterar</th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <i-feather class="align-middle" name="edit-2" (click)="alterar(element)"
+                                                    data-toggle="modal" data-target="#cadastroDeFornecedor"></i-feather>
+                                            </td>
+                                        </ng-container> -->
 
                                         <ng-container matColumnDef="remover">
                                             <th mat-header-cell *matHeaderCellDef>Remover</th>
                                             <td mat-cell *matCellDef="let element">
-                                                <i-feather class="align-middle" name="trash"></i-feather>
+                                                <i-feather class="align-middle" name="trash"
+                                                    (click)="desativar(element.id)"></i-feather>
                                             </td>
                                         </ng-container>
 
@@ -50,6 +120,62 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="cadastroDeFornecedor" tabindex="-1" role="dialog"
+                    aria-labelledby="modalCadastroDeFornecedor" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalCadastroDeFornecedor">Cadastrar novo fornecedor</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                    id="fecharModal">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <form [formGroup]="cadastroFornecedorForm" (ngSubmit)="cadastrarOuAlterar()">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="nomeFornecedor">* Nome:</label>
+                                        <input type="text" class="form-control" id="nomeFornecedor" formControlName="nome"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cpfCnpjFornecedor">* CPF/CNPJ:</label>
+                                        <input type="text" class="form-control" id="cpfCnpjFornecedor" formControlName="cpfCnpj"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="enderecoFornecedor">* Endereço:</label>
+                                        <input type="text" class="form-control" id="enderecoFornecedor" formControlName="endereco"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telefoneFornecedor">Telefone:</label>
+                                        <input type="text" class="form-control" id="telefoneFornecedor" formControlName="telefone" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="celularFornecedor">Celular:</label>
+                                        <input type="text" class="form-control" id="celularFornecedor" formControlName="celular" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emailFornecedor">E-mail:</label>
+                                        <input type="email" class="form-control" id="emailFornecedor" formControlName="email" />
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-secondary" data-dismiss="modal"
+                                        (click)="this.resetForm()">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </main>
 
