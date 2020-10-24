@@ -30,18 +30,12 @@ export class CriarRequisicaoComponent implements OnInit {
 
   ngOnInit(): void {
     this.requisicaoForm = this.formBuilder.group({
-      statusRequisicao: [1, [Validators.required]],
+      statusRequisicao: [{id: 1}, [Validators.required]],
       solicitante: this.formBuilder.group({
         id: [null, [Validators.required]]
       }),
       dataSolicitacao: [new Date(), [Validators.required]],
-      atendente: this.formBuilder.group({
-        id: [null, [Validators.required]],
-        nome: [null, []]
-      }),
-      dataAtendimento: [null, []],
       ativo: [true, [Validators.required]],
-      //itens: [[], [Validators.required]]
       itens: [[], []]
     });
 
@@ -51,86 +45,7 @@ export class CriarRequisicaoComponent implements OnInit {
     });
 
     this.carregarDados();
-    /*this.dataSource = new MatTableDataSource<PeriodicElement>(this.requisicaoForm.get("itens").value);
-    this.table.renderRows();*/
   }
-
-
-  /*public filtrarPorNome(nome: string) {
-    this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.nome.toLocaleLowerCase().includes(filter);
-    };
-
-    this.dataSource.filter = nome.trim().toLocaleLowerCase();
-  }
-
-
-  public filtrarPorMarca(marca: string) {
-    this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.marca.nome.toLocaleLowerCase().includes(filter);
-    };
-
-    this.dataSource.filter = marca.trim().toLocaleLowerCase();
-  }
-
-
-  public cadastrarOuAlterar() {
-    if (this.cadastroModeloForm.valid) {
-      if (this.cadastroModeloForm.get("id").value) {
-        this.modeloService.alterar(this.cadastroModeloForm.value).subscribe(res => {
-          this.listarTodos();
-          this.resetForm();
-          this.dismissModal();
-        }, err => {});
-      }
-      else {
-        this.modeloService.cadastrar(this.cadastroModeloForm.value).subscribe(res => {
-          this.listarTodos();
-          this.resetForm();
-          this.dismissModal();
-        }, err => {});
-      }
-    }
-  }
-
-
-  public alterar(element) {
-    this.cadastroModeloForm.get("id").setValue(element.id);
-    this.cadastroModeloForm.get("nome").setValue(element.nome);
-    this.cadastroModeloForm.get("marca").get("id").setValue(element.marca.id);
-    this.cadastroModeloForm.get("ativo").setValue(element.ativo);
-  }
-
-
-  public desativar(id: number) {
-    this.modeloService.desativar(id).subscribe(res => {
-      this.listarTodos();
-    }, err => {});
-  }
-
-
-  public buscar(id: number) {
-    this.modeloService.buscar(id).subscribe(res => {}, err => {});
-  }
-
-
-  public listarTodos() {
-    this.modeloService.listarTodos().subscribe((data: any[]) => {
-      this.modelos = data.filter(modelo => {
-        if (modelo.ativo) {
-          return modelo;
-        }
-      });
-      this.dataSource = new MatTableDataSource<PeriodicElement>(this.modelos);
-      this.dataSource.paginator = this.paginator;
-    });
-    this.carregarDados();
-  }
-
-
-  public dismissModal() {
-    document.getElementById("fecharModal").click();
-  }*/
 
 
   public removerItemRequisicao(id: number) {
@@ -148,7 +63,18 @@ export class CriarRequisicaoComponent implements OnInit {
 
 
   public enviarRequisicao() {
-    console.log(this.requisicaoForm);
+    if (sessionStorage.getItem("idUsuario")) {
+      this.requisicaoForm.get("solicitante.id").setValue(Number(sessionStorage.getItem("idUsuario")));
+    }
+    else {
+      this.requisicaoForm.get("solicitante.id").setValue(1);
+    }
+
+    if (this.requisicaoForm.valid) {
+      this.criarRequisicaoService.cadastrar(this.requisicaoForm.value).subscribe(res => {
+        this.resetForm();
+      });
+    }
   }
 
 
@@ -183,7 +109,8 @@ export class CriarRequisicaoComponent implements OnInit {
           this.requisicaoForm.get("itens").value.push(
             {
               material: material,
-              quantidade: this.incluirMaterialForm.get("quantidade").value
+              quantidade: this.incluirMaterialForm.get("quantidade").value,
+              ativo: true
             }
           );
         }
@@ -198,16 +125,11 @@ export class CriarRequisicaoComponent implements OnInit {
 
   public resetForm() {
     this.requisicaoForm = this.formBuilder.group({
-      statusRequisicao: [1, [Validators.required]],
+      statusRequisicao: [{id: 1}, [Validators.required]],
       solicitante: this.formBuilder.group({
         id: [null, [Validators.required]]
       }),
       dataSolicitacao: [new Date(), [Validators.required]],
-      atendente: this.formBuilder.group({
-        id: [null, [Validators.required]],
-        nome: [null, []]
-      }),
-      dataAtendimento: [null, []],
       ativo: [true, [Validators.required]],
       itens: [[], []]
     });
