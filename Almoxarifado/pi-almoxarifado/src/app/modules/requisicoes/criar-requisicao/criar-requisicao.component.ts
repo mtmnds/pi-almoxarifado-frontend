@@ -63,8 +63,9 @@ export class CriarRequisicaoComponent implements OnInit {
 
 
   public enviarRequisicao() {
-    if (sessionStorage.getItem("idUsuario")) {
-      this.requisicaoForm.get("solicitante.id").setValue(Number(sessionStorage.getItem("idUsuario")));
+    if (sessionStorage.getItem("dadosUsuario")) {
+      var dadosUsuario = JSON.parse(sessionStorage.getItem("dadosUsuario"));
+      this.requisicaoForm.get("solicitante.id").setValue(Number(dadosUsuario.id));
     }
     else {
       this.requisicaoForm.get("solicitante.id").setValue(1);
