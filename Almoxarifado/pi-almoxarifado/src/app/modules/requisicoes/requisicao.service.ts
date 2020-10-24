@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class CriarRequisicaoService {
+export class RequisicaoService {
 
   private urlBase = `${ environment.urlBase }/requisicao`;
 
@@ -13,7 +13,7 @@ export class CriarRequisicaoService {
     private http: HttpClient
   ) { }
 
-  public cadastrar(dados: any) {   
+  public criar(dados: any) {   
     return this.http.post(this.urlBase, dados);
   }
 
@@ -21,8 +21,12 @@ export class CriarRequisicaoService {
     return this.http.put(this.urlBase, dados);
   }
 
-  public desativar(id: number) {   
+  public cancelar(id: number) {   
     return this.http.delete(`${ this.urlBase }/${ id }`);
+  }
+
+  public aprovar(dados: any) {   
+    return this.http.post(`${ this.urlBase }/aprovacao`, dados);
   }
 
   public buscar(id: number) {   

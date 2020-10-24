@@ -23,7 +23,7 @@
                 </a>
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="javascript:void(0)" data-toggle="dropdown" (click)="toggleClass('user-options-menu', 'show')">
-                    <span style="margin-right: 20px;" class="text-dark"> Matheus Mendes | Administrador </span>
+                    <span style="margin-right: 20px;" class="text-dark"> {{ dadosUsuario.nome || "Funcionário" }} | {{ dadosUsuario.perfil.descricao || "Funcionário" }} </span>
                 </a>
 
                 <div id="user-options-menu" class="dropdown-menu dropdown-menu-right">
