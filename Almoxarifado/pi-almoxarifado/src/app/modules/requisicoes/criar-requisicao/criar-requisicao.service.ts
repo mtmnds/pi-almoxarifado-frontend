@@ -7,7 +7,9 @@ import { environment } from 'src/environments/environment';
 })
 export class CriarRequisicaoService {
 
-  private urlBase = `${ environment.urlBase }/requisicao`;
+  constructor() {}
+
+  /*private urlBase = `${ environment.urlBase }/requisicao`;
 
   constructor(
     private http: HttpClient
@@ -31,6 +33,6 @@ export class CriarRequisicaoService {
 
   public listarTodos() {   
     return this.http.get(this.urlBase);
-  }
+  }*/
 
 }
