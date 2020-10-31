@@ -29,6 +29,10 @@ export class RequisicaoService {
     return this.http.post(`${ this.urlBase }/aprovacao`, dados);
   }
 
+  public reprovar(dados: any) {   
+    return this.http.post(`${ this.urlBase }/reprovacao`, dados);
+  }
+
   public buscar(id: number) {   
     return this.http.get(`${ this.urlBase }/${ id }`);
   }

@@ -82,13 +82,13 @@
 
                                         <ng-container matColumnDef="atendente">
                                             <th mat-header-cell *matHeaderCellDef>Atendente</th>
-                                            <td mat-cell *matCellDef="let element">{{ element.atendente ? element.atendente : "" }}</td>
+                                            <td mat-cell *matCellDef="let element">{{ element.atendente ? element.atendente.nome : "" }}</td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="detalhes">
                                             <th mat-header-cell *matHeaderCellDef>Detalhes</th>
                                             <td mat-cell *matCellDef="let element">
-                                                <i-feather class="align-middle" name="eye" (click)="abrirDetalhe(element)"></i-feather>
+                                                <i-feather class="align-middle" name="eye" (click)="abrirDetalhe(element.id, element.statusRequisicao.id)"></i-feather>
                                             </td>
                                         </ng-container>
 

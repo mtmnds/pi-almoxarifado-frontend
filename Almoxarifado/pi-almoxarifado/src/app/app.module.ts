@@ -31,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { PerfilAcessoComponent } from './modules/cadastros/usuario/perfil-acesso/perfil-acesso.component';
+import { DetalheRequisicaoComponent } from './modules/requisicoes/detalhe-requisicao/detalhe-requisicao/detalhe-requisicao.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { PerfilAcessoComponent } from './modules/cadastros/usuario/perfil-acesso
     FornecedorComponent,
     LocalEstoqueComponent,
     UsuarioComponent,
-    PerfilAcessoComponent
+    PerfilAcessoComponent,
+    DetalheRequisicaoComponent
   ],
   imports: [
     BrowserModule,

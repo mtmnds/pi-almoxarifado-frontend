@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { RequisicaoService } from './requisicao.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class RequisicaoComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private router: Router,
     private requisicaoService: RequisicaoService
   ) { }
 
@@ -104,7 +106,14 @@ export class RequisicaoComponent implements OnInit {
   }
 
 
-  public abrirDetalhe(element) {}
+  public abrirDetalhe(idRequisicao, idStatusRequisicao) {
+    if (Number(idStatusRequisicao) === 1) {
+      this.router.navigate([`/atendimento/${ idRequisicao }`]);
+    }
+    else {
+      this.router.navigate([`/detalhe-requisicao/${ idRequisicao }`]);
+    }
+  }
 
 
   public formatarData(data: string) {
