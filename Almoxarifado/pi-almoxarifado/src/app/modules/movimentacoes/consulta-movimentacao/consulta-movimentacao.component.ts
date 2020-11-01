@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { ConsultaMovimentacaoService } from './consulta-movimentacao.service';
 
 
 @Component({
@@ -20,58 +21,17 @@ export class ConsultaMovimentacaoComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private movimentacaoService: ConsultaMovimentacaoService
   ) { }
 
 
   ngOnInit(): void {
-    this.movimentacoes = [
-      {
-        localOrigem: "Prateleira 1",
-        localDestino: "Prateleira 2",
-        material: {
-          codigo: "123574casd",
-          nome: "Material de teste"
-        },
-        quantidade: 5,
-        dataMovimentacao: "15/10/2020 00:52",
-        usuario: {
-          nome: "Matheus Mendes",
-          cpfCnpj: "123456789-12"
-        }
-      },
-      {
-        localOrigem: "Prateleira 1",
-        localDestino: "Prateleira 3",
-        material: {
-          codigo: "123574casd",
-          nome: "Material de teste"
-        },
-        quantidade: 2,
-        dataMovimentacao: "15/10/2020 00:12",
-        usuario: {
-          nome: "Matheus Mendes",
-          cpfCnpj: "123456789-12"
-        }
-      },
-      {
-        localOrigem: "Prateleira 2",
-        localDestino: "Prateleira 1",
-        material: {
-          codigo: "gdfg345546",
-          nome: "Material de teste 2"
-        },
-        quantidade: 5,
-        dataMovimentacao: "15/10/2020 23:12",
-        usuario: {
-          nome: "Bruna Taura",
-          cpfCnpj: "987654321-12"
-        }
-      }
-    ];
+    this.listarTodos();
 
-    this.dataSource = new MatTableDataSource<PeriodicElement>(this.movimentacoes);
-    this.dataSource.paginator = this.paginator;
+    window.setInterval(() =>{
+      this.listarTodos();
+    }, 30000);
   }
 
 
@@ -92,7 +52,7 @@ export class ConsultaMovimentacaoComponent implements OnInit {
 
   public filtrarPorLocalOrigem(local: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.localOrigem.toLocaleLowerCase().toString().includes(filter);
+      return data.localOrigem.nome.toLocaleLowerCase().toString().includes(filter);
     };
 
     this.dataSource.filter = local.trim().toLocaleLowerCase();
@@ -101,7 +61,7 @@ export class ConsultaMovimentacaoComponent implements OnInit {
 
   public filtrarPorLocalDestino(local: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.localDestino.toLocaleLowerCase().includes(filter);
+      return data.localDestino.nome.toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = local.trim().toLocaleLowerCase();
@@ -128,31 +88,86 @@ export class ConsultaMovimentacaoComponent implements OnInit {
 
   public filtrarPorUsuario(usuario: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.usuario.nome.toLocaleLowerCase().includes(filter) || data.usuario.cpfCnpj.toLocaleLowerCase().includes(filter);
+      return data.usuarioMovimentacao.nome.toLocaleLowerCase().includes(filter)
+        || data.usuarioMovimentacao.cpfCnpj.toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = usuario.trim().toLocaleLowerCase();
   }
 
-
   public exportar() {
     console.log(this.dataSource.filteredData);
+  }
+
+  public listarTodos() {
+    this.movimentacaoService.listarTodos().subscribe((data: any[]) => {
+      this.movimentacoes = data.filter(movimentacao => {
+        if (movimentacao.ativo) {
+          return movimentacao;
+        }
+      });
+
+      this.dataSource = new MatTableDataSource<PeriodicElement>(this.movimentacoes);
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  public formatarData(data: string) {
+    const d = new Date(data);
+    const ye = new Intl.DateTimeFormat('pt', { year: 'numeric' }).format(d);
+    const mo = new Intl.DateTimeFormat('pt', { month: '2-digit' }).format(d);
+    const da = new Intl.DateTimeFormat('pt', { day: '2-digit' }).format(d);
+    return `${da}/${mo}/${ye}`;
   }
 
 }
 
 
 export interface PeriodicElement {
-  localOrigem: string,
-  localDestino: string,
+  ativo: boolean,
+  dataMovimentacao: string,
+  id: number,
+  localDestino: {
+    ativo: boolean,
+    descricao: string,
+    id: number,
+    nome: string
+  },
+  localOrigem: {
+    ativo: boolean,
+    descricao: string,
+    id: number,
+    nome: string
+  },
   material: {
+    ativo: boolean,
     codigo: string,
+    id: number,
+    modelo: {
+      ativo: boolean,
+      id: number,
+      marca: {
+        ativo: boolean,
+        id: number,
+        nome: string
+      },
+      nome: string
+    },
     nome: string
   },
   quantidade: number,
-  dataMovimentacao: string,
-  usuario: {
+  usuarioMovimentacao: {
+    ativo: boolean,
+    cpfCnpj: string,
+    email: string,
+    id: number,
     nome: string,
-    cpfCnpj: string
+    perfil: {
+      ativo: boolean,
+      descricao: string,
+      id: number
+    },
+    senha: string
   }
 }
+
