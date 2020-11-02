@@ -174,7 +174,7 @@ export class MovimentacaoComponent implements OnInit {
     }
 
     if (this.movimentacaoForm.valid) {
-      this.movimentacaoService.gerar(this.montarObjeto(this.movimentacaoForm.value)).subscribe(res => {
+      this.movimentacaoService.movimentarSaldo(this.montarObjeto(this.movimentacaoForm.value)).subscribe(res => {
         this.resetForm();
       });
     }
