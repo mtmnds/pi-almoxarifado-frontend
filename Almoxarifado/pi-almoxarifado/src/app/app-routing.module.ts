@@ -17,6 +17,7 @@ import { ConsultaRecebimentoComponent } from './modules/recebimento/consulta-rec
 import { RecebimentoComponent } from './modules/recebimento/recebimento/recebimento.component';
 import { AtendimentoComponent } from './modules/requisicoes/atendimento/atendimento.component';
 import { CriarRequisicaoComponent } from './modules/requisicoes/criar-requisicao/criar-requisicao.component';
+import { DetalheRequisicaoComponent } from './modules/requisicoes/detalhe-requisicao/detalhe-requisicao/detalhe-requisicao.component';
 import { RequisicaoComponent } from './modules/requisicoes/requisicao/requisicao.component';
 
 
@@ -37,9 +38,10 @@ const routes: Routes = [
   { path: "consulta-movimentacao", component: ConsultaMovimentacaoComponent },
 
   // Requisições
-  { path: "atendimento", component: AtendimentoComponent },
+  { path: "atendimento/:idRequisicao", component: AtendimentoComponent },
   { path: "criar-requisicao", component: CriarRequisicaoComponent },
   { path: "consulta-requisicao", component: RequisicaoComponent },
+  { path: "detalhe-requisicao/:idRequisicao", component: DetalheRequisicaoComponent },
 
   // Inventários
   { path: "acompanhamento-inventario", component: AcompanhamentoInventarioComponent },

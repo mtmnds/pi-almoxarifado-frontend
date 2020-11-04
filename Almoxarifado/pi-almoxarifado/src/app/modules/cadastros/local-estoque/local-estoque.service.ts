@@ -29,6 +29,10 @@ export class LocalEstoqueService {
     return this.http.get(`${ this.urlBase }/${ id }`);
   }
 
+  public buscarEstoqueTecnico(nomeLocal: string) {   
+    return this.http.get(`${ this.urlBase }/local-tecnico/${ nomeLocal }`);
+  }
+
   public listarTodos() {   
     return this.http.get(this.urlBase);
   }

@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MaterialService } from '../../cadastros/material/material.service';
-import { CriarRequisicaoService } from './criar-requisicao.service';
+import { RequisicaoService } from '../requisicao.service';
 
 @Component({
   selector: 'app-criar-requisicao',
@@ -24,7 +24,7 @@ export class CriarRequisicaoComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private criarRequisicaoService: CriarRequisicaoService,
+    private requisicaoService: RequisicaoService,
     private materialService: MaterialService
   ) { }
 
@@ -72,7 +72,7 @@ export class CriarRequisicaoComponent implements OnInit {
     }
 
     if (this.requisicaoForm.valid) {
-      this.criarRequisicaoService.cadastrar(this.requisicaoForm.value).subscribe(res => {
+      this.requisicaoService.criar(this.requisicaoForm.value).subscribe(res => {
         this.resetForm();
       });
     }

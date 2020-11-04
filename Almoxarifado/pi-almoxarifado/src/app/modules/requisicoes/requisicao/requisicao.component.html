@@ -10,21 +10,103 @@
 
                 <div class="row mb-2 mb-xl-3">
                     <div class="col-auto d-none d-sm-block">
-                        <h3>Consulta de requisições</h3>
+                        <h3>Requisições</h3>
                     </div>
                 </div>
 
-        <div class="card">
-            <div class="card-body">
+                <div class="card">
+                    <div class="card-header">
+                        <form>
+                            <div class="form-group">
+                                <label for="filtroNumero">Número da requisição:</label>
+                                <input type="text" class="form-control" id="filtroNumero" (keyup)="filtrarPorNumero($event.target.value)"/>
+                            </div>
+                            <!-- <div class="form-group">
+                                <label for="filtroMaterial">Material:</label>
+                                <input type="text" class="form-control" id="filtroMaterial" (keyup)="filtrarPorMaterial($event.target.value)"/>
+                            </div> -->
+                            <div class="form-group">
+                                <label for="filtroSolicitante">Solicitante:</label>
+                                <input type="text" class="form-control" id="filtroSolicitante" (keyup)="filtrarPorSolicitante($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="filtroAtendente">Atendente:</label>
+                                <input type="text" class="form-control" id="filtroAtendente" (keyup)="filtrarPorAtendente($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="filtroDataRequisicao">Data da requisição:</label>
+                                <input type="text" class="form-control" id="filtroDataRequisicao" (keyup)="filtrarPorDataRequisicao($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="filtroStatus">Status:</label>
+                                <select class="form-control" id="filtroStatus" (change)="filtrarPorStatus($event.target.value)">
+                                    <option selected>Todos</option>
+                                    <option>Pendente</option>
+                                    <option>Atendida</option>
+                                    <option>Cancelada</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
 
-                <div class="row">
-                    <div class="col"></div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+
+                                <div>
+                                    <table mat-table [dataSource]="dataSource" class="w-100">
+                                        <ng-container matColumnDef="codigo">
+                                            <th mat-header-cell *matHeaderCellDef>Número</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="status">
+                                            <th mat-header-cell *matHeaderCellDef>Status</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.statusRequisicao.descricao }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="dataRequisicao">
+                                            <th mat-header-cell *matHeaderCellDef>Data da requisição</th>
+                                            <td mat-cell *matCellDef="let element">{{ formatarData(element.dataSolicitacao) }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="solicitante">
+                                            <th mat-header-cell *matHeaderCellDef>Solicitante</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.solicitante.nome }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="dataAtendimento">
+                                            <th mat-header-cell *matHeaderCellDef>Data do atendimento</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.dataAtendimento ? formatarData(element.dataAtendimento) : "" }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="atendente">
+                                            <th mat-header-cell *matHeaderCellDef>Atendente</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.atendente ? element.atendente.nome : "" }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="detalhes">
+                                            <th mat-header-cell *matHeaderCellDef>Detalhes</th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <i-feather class="align-middle" name="eye" (click)="abrirDetalhe(element.id, element.statusRequisicao.id)"></i-feather>
+                                            </td>
+                                        </ng-container>
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                    </table>
+
+                                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</main>
 
-</div>
+            </div>
+        </main>
+
+    </div>
 
 </div>
