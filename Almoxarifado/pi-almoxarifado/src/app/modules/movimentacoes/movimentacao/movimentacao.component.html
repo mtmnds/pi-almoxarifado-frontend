@@ -12,16 +12,140 @@
                     <div class="col-auto d-none d-sm-block">
                         <h3>Movimentação de saldo</h3>
                     </div>
-                </div>
+                </div>            
 
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-header">
+                        <form [formGroup]="incluirMaterialForm" (ngSubmit)="adicionarItemMovimentacao()">
+                            
+                            <div class="row">
+                                
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="selectLocalOrigem">* Local de Origem:</label>
+                                        <select class="form-control" id="selectLocalOrigem" formControlName="idLocalOrigem" (change)="filtrarLocaisDestino($event.target.value)" required>
+                                            <option selected></option>
+                                            <option *ngFor="let local of locaisEstoque" value="{{ local.id }}">{{ local.nome }}</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                        <div class="row">
-                            <div class="col"></div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="selectLocalDestino">* Local de Destino:</label>
+                                        <select class="form-control" id="selectLocalDestino" formControlName="idLocalDestino" required>
+                                            <option selected></option>
+                                            <option *ngFor="let local of locaisEstoqueDestino" value="{{ local.id }}">{{ local.nome }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <label for="selectMaterial">* Material:</label>
+                                        <select class="form-control" id="selectMaterial" formControlName="idMaterial" required>
+                                            <option selected></option>
+                                            <option *ngFor="let material of materiais" value="{{ material.id }}">({{ material.codigo }}) - {{ material.nome }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="txtQuantidade">* Quantidade:</label>
+                                        <input type="number" class="form-control" id="txtQuantidade" formControlName="quantidade"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="row">
+                                <div class="col text-right">
+                                    <button type="submit" class="btn btn-primary" [disabled]="desabilitarAdicionar">Adicionar</button>
+                                </div>
+                            </div> -->
+                        </form>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <form [formGroup]="movimentacaoForm" (ngSubmit)="enviarMovimentacao()">
+                                    <div class="row">
+                                        <div class="col text-right">
+                                            <button type="button" class="btn btn-secondary" (click)="this.resetForm()">Cancelar movimentação</button>
+                                            <button type="submit" class="ml-3 btn btn-success">Confirmar movimentação</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                <h4>Materiais que serão movimentados:</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+
+                                <div>
+                                    <table mat-table [dataSource]="dataSource" class="w-100">
+                                        <ng-container matColumnDef="localOrigem">
+                                            <th mat-header-cell *matHeaderCellDef>Local de Origem</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.localOrigem.nome }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="localDestino">
+                                            <th mat-header-cell *matHeaderCellDef>Local de Destino</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.localDestino.nome }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="material">
+                                            <th mat-header-cell *matHeaderCellDef>Material</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.material.nome }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="quantidade">
+                                            <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.quantidade }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="remover">
+                                            <th mat-header-cell *matHeaderCellDef>Remover</th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <i-feather class="align-middle" name="trash"
+                                                    (click)="removerItemMovimentacao(element.material.id, element.localOrigem.id, element.localDestino.id)"></i-feather>
+                                            </td>
+                                        </ng-container>
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <form [formGroup]="movimentacaoForm" (ngSubmit)="enviarMovimentacao()">
+                                <div class="row">
+                                    <div class="col text-right">
+                                        <button type="button" class="btn btn-secondary" (click)="this.resetForm()">Cancelar solicitação</button>
+                                        <button type="submit" class="ml-3 btn btn-success">Enviar solicitação</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div> -->
             </div>
         </main>
 

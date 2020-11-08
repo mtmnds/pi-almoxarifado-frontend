@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { SaldoService } from './saldo.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { MatTableDataSource, MatTable } from '@angular/material/table';
 })
 export class SaldoComponent implements OnInit {
 
-  public estoque;
+  public estoques;
   public displayedColumns: string[] = ["codigo", "nome", "marca", "modelo", "local", "quantidade"];
   public dataSource;
 
@@ -20,60 +21,29 @@ export class SaldoComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private saldoService: SaldoService
   ) { }
 
 
   ngOnInit(): void {
-    this.estoque = [
-      {
-        codigo: "1",
-        nome: "Teste",
-        marca: "Marca 1",
-        modelo: "Modelo 1",
-        local: "abc123",
-        quantidade: 0
-      },
-      {
-        codigo: "276534",
-        nome: "Teste",
-        marca: "Marca 2",
-        modelo: "Modelo 2",
-        local: "abc123",
-        quantidade: 3
-      },
-      {
-        codigo: "3",
-        nome: "Teste",
-        marca: "Marca 3",
-        modelo: "Modelo 3",
-        local: "abc123",
-        quantidade: 8
-      },
-      {
-        codigo: "4",
-        nome: "Teste abc",
-        marca: "Marca 4",
-        modelo: "Modelo 4",
-        local: "abc123",
-        quantidade: 8
-      }
-    ];
+    this.listarTodos();
 
-    this.dataSource = new MatTableDataSource<PeriodicElement>(this.estoque);
-    this.dataSource.paginator = this.paginator;
+    window.setInterval(() =>{
+      this.listarTodos();
+    }, 30000);
   }
 
 
   private renderTable() {
-    this.dataSource = new MatTableDataSource<PeriodicElement>(this.estoque);
+    this.dataSource = new MatTableDataSource<PeriodicElement>(this.estoques);
     this.table.renderRows();
   }
 
 
   public filtrarPorCodigo(codigo: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.codigo.toLocaleLowerCase().includes(filter);
+      return data.material.codigo.toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = codigo.trim().toLocaleLowerCase();
@@ -82,7 +52,7 @@ export class SaldoComponent implements OnInit {
 
   public filtrarPorNome(nome: string) {
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
-      return data.nome.toLocaleLowerCase().includes(filter);
+      return data.material.nome.toLocaleLowerCase().includes(filter);
     };
 
     this.dataSource.filter = nome.trim().toLocaleLowerCase();
@@ -97,14 +67,46 @@ export class SaldoComponent implements OnInit {
     this.dataSource.filter = quantidade;
   }
 
+  public listarTodos() {
+    this.saldoService.listarTodos().subscribe((data: any[]) => {
+      this.estoques = data.filter(estoque => {       
+        if (estoque.ativo && estoque.localEstoque.id !== 1 && estoque.localEstoque.id !== 3) {
+          return estoque;
+        }
+      });
+
+      this.dataSource = new MatTableDataSource<PeriodicElement>(this.estoques);
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+
 }
 
 
 export interface PeriodicElement {
-  codigo: string,
-  nome: string,
-  marca: string,
-  modelo: string,
-  local: string,
+  ativo: boolean,
+  id: number,
+  localEstoque: {
+    ativo: boolean,
+    descricao: string,
+    id: number,
+    nome: string
+  },
+  material: {
+    ativo: boolean,
+    codigo: string,
+    id: number,
+    modelo: {
+      ativo: boolean,
+      id: number,
+      marca: {
+        ativo: boolean,
+        id: number,
+        nome: string
+      },
+      nome: string
+    },
+    nome: string
+  },
   quantidade: number
 }

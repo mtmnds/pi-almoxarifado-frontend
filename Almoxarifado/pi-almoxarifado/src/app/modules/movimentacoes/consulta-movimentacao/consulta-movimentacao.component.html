@@ -10,95 +10,75 @@
 
                 <div class="row mb-2 mb-xl-3">
                     <div class="col-auto d-none d-sm-block">
-                        <h3>Consulta de movimentações de materiais</h3>
+                        <h3>Consulta de Movimentações</h3>
                     </div>
                 </div>
 
                 <div class="card">
+                    <div class="card-header">
+                        <form>
+                            <div class="form-group">
+                                <label for="nomeMaterial">Nome do Material:</label>
+                                <input type="text" class="form-control" id="nomeMaterial" (keyup)="filtrarPorMaterial($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="localOrigem">Local de Origem:</label>
+                                <input type="text" class="form-control" id="localOrigem" (keyup)="filtrarPorLocalOrigem($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="localDestino">Local de Destino:</label>
+                                <input type="text" class="form-control" id="localDestino" (keyup)="filtrarPorLocalDestino($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="dataMovimentacao">Data da Movimentação:</label>
+                                <input type="text" class="form-control" id="dataMovimentacao" (keyup)="filtrarPorDataMovimentacao($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantidade">Quantidade do Material:</label>
+                                <input type="text" class="form-control" id="quantidade" (keyup)="filtrarPorQuantidade($event.target.value)"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="usuario">Usuário:</label>
+                                <input type="text" class="form-control" id="usuario" (keyup)="filtrarPorUsuario($event.target.value)"/>
+                            </div>
+                            
+                        </form>
+                    </div>
 
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        <input class="w-100" type="text"
-                                            (keyup)="filtrarPorMaterial($event.target.value)" placeholder="Material">
-                                    </div>
-
-                                    <div class="col">
-                                        <input class="w-100" type="text"
-                                            (keyup)="filtrarPorLocalOrigem($event.target.value)"
-                                            placeholder="Local de origem">
-                                    </div>
-
-                                    <div class="col">
-                                        <input class="w-100" type="text"
-                                            (keyup)="filtrarPorLocalDestino($event.target.value)"
-                                            placeholder="Local de destino">
-                                    </div>
-
-                                    <div class="col">
-                                        <input class="w-100" type="text"
-                                            (keyup)="filtrarPorDataMovimentacao($event.target.value)"
-                                            placeholder="Data da movimentação">
-                                    </div>
-
-                                    <div class="col">
-                                        <input class="w-100" type="text"
-                                            (keyup)="filtrarPorQuantidade($event.target.value)"
-                                            placeholder="Quantidade">
-                                    </div>
-
-                                    <div class="col">
-                                        <input class="w-100" type="text"
-                                            (keyup)="filtrarPorUsuario($event.target.value)" placeholder="Usuário">
-                                    </div>
-                                </div>
-
-                                <div class="row mt-4">
-                                    <div class="col text-right">
-                                        <button type="button" class="btn btn-success btn-sm"
-                                            (click)="exportar()">Exportar para Excel</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="row">
                             <div class="col">
 
                                 <div>
                                     <table mat-table [dataSource]="dataSource" class="w-100">
                                         <ng-container matColumnDef="dataMovimentacao">
-                                            <th mat-header-cell *matHeaderCellDef>Data da movimentação</th>
-                                            <td mat-cell *matCellDef="let element">{{ element.dataMovimentacao }}</td>
+                                            <th mat-header-cell *matHeaderCellDef>Data da Movimentação</th>
+                                            <td mat-cell *matCellDef="let element">{{ formatarData(element.dataMovimentacao) }}</td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="localOrigem">
-                                            <th mat-header-cell *matHeaderCellDef>Local de origem</th>
-                                            <td mat-cell *matCellDef="let element">{{ element.localOrigem }}</td>
+                                            <th mat-header-cell *matHeaderCellDef>Local de Origem</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.localOrigem.nome }}</td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="localDestino">
-                                            <th mat-header-cell *matHeaderCellDef>Local de destino</th>
-                                            <td mat-cell *matCellDef="let element">{{ element.localDestino }}</td>
+                                            <th mat-header-cell *matHeaderCellDef>Local de Destino</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.localDestino.nome }}</td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="material">
                                             <th mat-header-cell *matHeaderCellDef>Material</th>
-                                            <td mat-cell *matCellDef="let element">{{ element.material.nome }}
-                                                ({{ element.material.codigo }})</td>
+                                            <td mat-cell *matCellDef="let element">{{ element.material.nome }}</td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="quantidade">
-                                            <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+                                            <th mat-header-cell *matHeaderCellDef>Quantidade do Material</th>
                                             <td mat-cell *matCellDef="let element">{{ element.quantidade }}</td>
                                         </ng-container>
 
                                         <ng-container matColumnDef="usuario">
                                             <th mat-header-cell *matHeaderCellDef>Usuário</th>
-                                            <td mat-cell *matCellDef="let element">{{ element.usuario.nome }}
-                                                ({{ element.usuario.cpfCnpj }})</td>
+                                            <td mat-cell *matCellDef="let element">{{ element.usuarioMovimentacao.nome }}</td>
                                         </ng-container>
 
                                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -112,6 +92,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </main>
 

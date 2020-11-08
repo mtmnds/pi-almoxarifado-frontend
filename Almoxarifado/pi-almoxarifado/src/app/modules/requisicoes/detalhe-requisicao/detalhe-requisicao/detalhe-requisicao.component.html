@@ -1,0 +1,105 @@
+<div class="wrapper">
+
+    <app-sidebar></app-sidebar>
+
+    <div class="main">
+        <app-navbar></app-navbar>
+
+        <main class="content">
+            <div class="container-fluid p-0">
+
+                <div class="row mb-2 mb-xl-3">
+                    <div class="col-auto d-none d-sm-block">
+                        <h3>Detalhes da requisição</h3>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <form>
+                            <div class="form-group">
+                                <label for="campoNumeroRequisicao">Número da requisição:</label>
+                                <input type="text" class="form-control" id="campoNumeroRequisicao" value="{{ this.requisicao ? this.requisicao.id : '' }}" readonly/>
+                            </div>
+                            <div class="form-group">
+                                <label for="campoStatusRequisicao">Status:</label>
+                                <input type="text" class="form-control" id="campoStatusRequisicao" value="{{ this.requisicao ? this.requisicao.statusRequisicao.descricao : '' }}" readonly/>
+                            </div>
+                            <div class="form-group">
+                                <label for="campoNomeSolicitante">Solicitante:</label>
+                                <input type="text" class="form-control" id="campoNomeSolicitante" value="{{ this.requisicao ? this.requisicao.solicitante.nome : '' }}" readonly/>
+                            </div>
+                            <div class="form-group">
+                                <label for="campoDataRequisicao">Data da requisição:</label>
+                                <input type="text" class="form-control" id="campoDataRequisicao" value="{{ this.requisicao ? formatarData(this.requisicao.dataSolicitacao) : '' }}" readonly/>
+                            </div>
+                            <div class="form-group">
+                                <label for="campoNomeAtendente">Atendente:</label>
+                                <input type="text" class="form-control" id="campoNomeAtendente" value="{{ this.requisicao && this.requisicao.atendente ? this.requisicao.atendente.nome : '' }}" readonly/>
+                            </div>
+                            <div class="form-group">
+                                <label for="campoDataAtendimento">Data do atendimento:</label>
+                                <input type="text" class="form-control" id="campoDataAtendimento" value="{{ this.requisicao && this.requisicao.dataAtendimento ? formatarData(this.requisicao.dataAtendimento) : '' }}" readonly/>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+
+                                <div>
+                                    <table mat-table [dataSource]="dataSource" class="w-100">
+                                        <ng-container matColumnDef="codigoMaterial">
+                                            <th mat-header-cell *matHeaderCellDef>Código</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.material.codigo }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="nomeMaterial">
+                                            <th mat-header-cell *matHeaderCellDef>Nome</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.material.nome }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="marcaMaterial">
+                                            <th mat-header-cell *matHeaderCellDef>Marca</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.material.modelo.marca.nome }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="modeloMaterial">
+                                            <th mat-header-cell *matHeaderCellDef>Modelo</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.material.modelo.nome }}</td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="quantidade">
+                                            <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+                                            <td mat-cell *matCellDef="let element">{{ element.quantidade }}</td>
+                                        </ng-container>
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                    </table>
+
+                                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col text-left">
+                                <button class="ml-3 btn btn-secondary" (click)="voltarPagina()">Voltar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+</div>
