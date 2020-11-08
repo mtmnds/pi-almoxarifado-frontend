@@ -16,4 +16,9 @@ export class SaldoService {
   public listarTodos() {
     return this.http.get(this.urlBase);
   }
+
+  public limparSaldo(limparSaldoDto) {
+    return this.http.post(`${this.urlBase}/limparSaldo`, limparSaldoDto);
+  }
+
 }

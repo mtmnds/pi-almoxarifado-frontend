@@ -26,12 +26,16 @@ import { FornecedorComponent } from './modules/cadastros/fornecedor/fornecedor.c
 import { LocalEstoqueComponent } from './modules/cadastros/local-estoque/local-estoque.component';
 import { UsuarioComponent } from './modules/cadastros/usuario/usuario.component';
 import { HttpClientModule } from '@angular/common/http';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { PerfilAcessoComponent } from './modules/cadastros/usuario/perfil-acesso/perfil-acesso.component';
 import { DetalheRequisicaoComponent } from './modules/requisicoes/detalhe-requisicao/detalhe-requisicao/detalhe-requisicao.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DetalheInventarioComponent } from './modules/inventarios/detalhe-inventario/detalhe-inventario/detalhe-inventario.component';
+import { ContagemComponent } from './modules/inventarios/contagem/contagem.component';
 
 
 @NgModule({
@@ -58,7 +62,9 @@ import { DetalheRequisicaoComponent } from './modules/requisicoes/detalhe-requis
     LocalEstoqueComponent,
     UsuarioComponent,
     PerfilAcessoComponent,
-    DetalheRequisicaoComponent
+    DetalheRequisicaoComponent,
+    DetalheInventarioComponent,
+    ContagemComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +75,9 @@ import { DetalheRequisicaoComponent } from './modules/requisicoes/detalhe-requis
     BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
