@@ -70,7 +70,7 @@ export class SaldoComponent implements OnInit {
   public listarTodos() {
     this.saldoService.listarTodos().subscribe((data: any[]) => {
       this.estoques = data.filter(estoque => {       
-        if (estoque.ativo && estoque.localEstoque.id !== 1) {
+        if (estoque.ativo && estoque.localEstoque.id !== 1 && estoque.localEstoque.id !== 3) {
           return estoque;
         }
       });

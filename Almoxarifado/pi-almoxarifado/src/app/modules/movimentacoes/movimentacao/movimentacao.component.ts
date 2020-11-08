@@ -66,7 +66,7 @@ export class MovimentacaoComponent implements OnInit {
 
     this.localEstoqueService.listarTodos().subscribe((data: any[]) => {
       this.locaisEstoque = data.filter(localEstoque => {
-        if (localEstoque.ativo && localEstoque.id !== 1) {
+        if (localEstoque.ativo && localEstoque.id !== 1 && localEstoque.id !== 3) {
           return localEstoque;
         }
       });
@@ -165,6 +165,8 @@ export class MovimentacaoComponent implements OnInit {
   }
 
   public enviarMovimentacao() {
+    this.adicionarItemMovimentacao();
+
     if (sessionStorage.getItem("dadosUsuario")) {
       var dadosUsuario = JSON.parse(sessionStorage.getItem("dadosUsuario"));
       this.movimentacaoForm.get("usuarioMovimentacao.id").setValue(Number(dadosUsuario.id));

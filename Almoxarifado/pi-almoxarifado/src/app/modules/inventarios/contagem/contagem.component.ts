@@ -7,6 +7,7 @@ import { InventarioService } from '../inventario/inventario.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovimentacaoService } from '../../movimentacoes/movimentacao/movimentacao.service';
 import { LocalEstoqueService } from '../../cadastros/local-estoque/local-estoque.service';
+import { SaldoService } from '../../estoque/saldo/saldo.service';
 
 
 
@@ -40,6 +41,7 @@ export class ContagemComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private movimentacaoService: MovimentacaoService,
+    private saldoService: SaldoService
   ) { }
 
   ngOnInit(): void {
@@ -104,6 +106,7 @@ export class ContagemComponent implements OnInit {
     if (this.contagemForm.valid) {
       this.inventarioService.alterar(this.contagemForm.value).subscribe(res => {
         this.resetForm();
+        this.router.navigate([`/acompanhamento-inventario`]);
       });
     }
   }
@@ -205,7 +208,7 @@ export class ContagemComponent implements OnInit {
     });
     this.localEstoqueService.listarTodos().subscribe((data: any[]) => {
       this.locaisEstoque = data.filter(localEstoque => {
-        if (localEstoque.ativo) {
+        if (localEstoque.ativo && localEstoque.id !== 1 && localEstoque.id !== 3) {
           return localEstoque;
         }
       });
@@ -222,6 +225,26 @@ export class ContagemComponent implements OnInit {
     };
 
     this.inventarioService.aprovar(aprovacaoInventarioDto).subscribe(dados => {
+      this.contagemForm.get("itens").value.forEach(itemInventario => {
+        var limparSaldoDto = {
+          localEstoque: itemInventario.localEstoque,
+          material: itemInventario.material
+        };
+
+        this.saldoService.limparSaldo(limparSaldoDto).subscribe(() => {
+          var movimentacaoDto = {
+            ativo: true,
+            material: itemInventario.material,
+            localOrigem: {id: 3},
+            localDestino: itemInventario.localEstoque,
+            quantidade: itemInventario.quantidade,
+            usuarioMovimentacao: JSON.parse(sessionStorage.getItem("dadosUsuario"))
+          };
+  
+          this.movimentacaoService.movimentarSaldo(movimentacaoDto).subscribe(movimentacao => {});
+        });
+      });
+
       this.router.navigate([`/acompanhamento-inventario`]);
     });
 

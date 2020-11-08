@@ -59,16 +59,29 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col text-right">
                                     <button type="submit" class="btn btn-primary" [disabled]="desabilitarAdicionar">Adicionar</button>
                                 </div>
-                            </div>
+                            </div> -->
                         </form>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <form [formGroup]="movimentacaoForm" (ngSubmit)="enviarMovimentacao()">
+                                    <div class="row">
+                                        <div class="col text-right">
+                                            <button type="button" class="btn btn-secondary" (click)="this.resetForm()">Cancelar movimentação</button>
+                                            <button type="submit" class="ml-3 btn btn-success">Confirmar movimentação</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card">
+                <!-- <div class="card">
                     <div class="card-header">
                         <div class="row">
                             <div class="col">
@@ -132,7 +145,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </main>
 
