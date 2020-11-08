@@ -66,7 +66,7 @@ export class MovimentacaoComponent implements OnInit {
 
     this.localEstoqueService.listarTodos().subscribe((data: any[]) => {
       this.locaisEstoque = data.filter(localEstoque => {
-        if (localEstoque.ativo) {
+        if (localEstoque.ativo && localEstoque.id !== 1) {
           return localEstoque;
         }
       });
@@ -132,7 +132,7 @@ export class MovimentacaoComponent implements OnInit {
     });
   }
 
-  public removerItemRequisicao(idMaterial: number, idLocalOrigem: number, idLocalDestino: number) {
+  public removerItemMovimentacao(idMaterial: number, idLocalOrigem: number, idLocalDestino: number) {
     var arrayFiltrado = [];
 
     Array.prototype.forEach.call(this.movimentacaoForm.get("itens").value, element => {
@@ -164,7 +164,7 @@ export class MovimentacaoComponent implements OnInit {
     this.desabilitarAdicionar = false;
   }
 
-  public enviarRequisicao() {
+  public enviarMovimentacao() {
     if (sessionStorage.getItem("dadosUsuario")) {
       var dadosUsuario = JSON.parse(sessionStorage.getItem("dadosUsuario"));
       this.movimentacaoForm.get("usuarioMovimentacao.id").setValue(Number(dadosUsuario.id));

@@ -94,29 +94,33 @@ export class ConsultaRecebimentoComponent implements OnInit {
     this.recebimentoService.listarTodos().subscribe((data: any[]) => {
       this.notasFiscaisRecebidas = data.filter(notaFiscal => {
         if (notaFiscal.ativo) {
-
-          notaFiscal.itens.forEach(element => {
-            let varObjeto =
-            {
-              dataRecebimento: this.formatarData(notaFiscal.dataRecebimento),
-              fornecedor: {
-                nome: notaFiscal.fornecedor.nome,
-                cpfCnpj: notaFiscal.fornecedor.cpfCnpj,
-              },
-              item: {
-                codigo: element.material.codigo,
-                nome: element.material.nome,
-                quantidade: element.quantidade
-              },
-              numero: notaFiscal.numero,
-              serie: notaFiscal.serie
-            }
-
-            this.gridRecebimento.push(varObjeto);
-          });
+          return notaFiscal;
         }
       });
 
+      this.gridRecebimento = [];
+      this.notasFiscaisRecebidas.forEach(notaFiscal => {
+        notaFiscal.itens.forEach(element => {
+          let varObjeto =
+          {
+            dataRecebimento: this.formatarData(notaFiscal.dataRecebimento),
+            fornecedor: {
+              nome: notaFiscal.fornecedor.nome,
+              cpfCnpj: notaFiscal.fornecedor.cpfCnpj,
+            },
+            item: {
+              codigo: element.material.codigo,
+              nome: element.material.nome,
+              quantidade: element.quantidade
+            },
+            numero: notaFiscal.numero,
+            serie: notaFiscal.serie
+          }
+
+          this.gridRecebimento.push(varObjeto);
+        });
+      });
+          
       this.dataSource = new MatTableDataSource<PeriodicElement>(this.gridRecebimento);
       this.dataSource.paginator = this.paginator;
     });

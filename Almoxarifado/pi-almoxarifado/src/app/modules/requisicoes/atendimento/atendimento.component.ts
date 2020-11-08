@@ -70,7 +70,7 @@ export class AtendimentoComponent implements OnInit {
       this.locaisEstoque = [];
 
       locais.forEach(element => {
-        if (!element.nome.includes("estoque_tecnico_")) {
+        if (!element.nome.includes("estoque_tecnico_") && element.id !== 1) {
           this.locaisEstoque.push(element);
         }
       });
@@ -104,6 +104,7 @@ export class AtendimentoComponent implements OnInit {
         var item: any = element[1];
 
         var movimentacaoDto = {
+          ativo: true,
           material: item.requisicao.material,
           localOrigem: item.localEstoqueOrigem,
           localDestino: item.localEstoqueDestino,
