@@ -19,6 +19,8 @@ import { AtendimentoComponent } from './modules/requisicoes/atendimento/atendime
 import { CriarRequisicaoComponent } from './modules/requisicoes/criar-requisicao/criar-requisicao.component';
 import { DetalheRequisicaoComponent } from './modules/requisicoes/detalhe-requisicao/detalhe-requisicao/detalhe-requisicao.component';
 import { RequisicaoComponent } from './modules/requisicoes/requisicao/requisicao.component';
+import { DetalheInventarioComponent } from './modules/inventarios/detalhe-inventario/detalhe-inventario/detalhe-inventario.component';
+import { ContagemComponent } from './modules/inventarios/contagem/contagem.component';
 
 
 const routes: Routes = [
@@ -46,6 +48,8 @@ const routes: Routes = [
   // Inventários
   { path: "acompanhamento-inventario", component: AcompanhamentoInventarioComponent },
   { path: "inventario", component: InventarioComponent },
+  { path: "detalhe-inventario/:idInventario", component: DetalheInventarioComponent },
+  { path: "contagem/:idInventario", component: ContagemComponent },
 
   // Cadastros
   { path: "material", component: MaterialComponent },

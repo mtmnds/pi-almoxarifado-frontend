@@ -15,13 +15,35 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-header">
+                        <form [formGroup]="inventarioForm" (ngSubmit)="CriarInventario()">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <label for="selectMaterial">* Descrição:</label>
+                                        <input type="text" class="form-control" id="txtQuantidade" formControlName="descricao"/>
+                                    </div>
+                                </div>
 
-                        <div class="row">
-                            <div class="col"></div>
-                        </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="txtQuantidade">* Data Início:</label>
+                                        <input type="datetime" class="form-control" id="txtQuantidade" formControlName="dataInicio"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <form [formGroup]="inventarioForm"  (ngSubmit)="CriarInventario()">
+                                <div class="row">
+                                    <div class="col text-right">
+                                        <button type="submit" class="ml-3 btn btn-success">Criar inventário</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </form>
                     </div>
                 </div>
+
             </div>
         </main>
 
