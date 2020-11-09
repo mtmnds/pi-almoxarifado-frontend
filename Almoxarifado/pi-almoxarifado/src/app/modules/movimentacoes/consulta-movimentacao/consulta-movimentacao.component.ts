@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { ExcelService } from 'src/app/shared/services/excel/excel.service';
 import { ConsultaMovimentacaoService } from './consulta-movimentacao.service';
 
 
@@ -22,7 +23,8 @@ export class ConsultaMovimentacaoComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private movimentacaoService: ConsultaMovimentacaoService
+    private movimentacaoService: ConsultaMovimentacaoService,
+    private excelService: ExcelService
   ) { }
 
 
@@ -118,6 +120,38 @@ export class ConsultaMovimentacaoComponent implements OnInit {
     const mo = new Intl.DateTimeFormat('pt', { month: '2-digit' }).format(d);
     const da = new Intl.DateTimeFormat('pt', { day: '2-digit' }).format(d);
     return `${da}/${mo}/${ye}`;
+  }
+
+  public exportarExcel() {
+    var dados = [];
+
+    this.dataSource.filteredData.forEach(item => {
+      var linha = {
+        "Data da movimentação": item.dataMovimentacao,
+        "Local de origem": item.localOrigem.nome,
+        "Local de destino": item.localDestino.nome,
+        "Material": item.material.nome,
+        "Quantidade": item.quantidade,
+        "Usuário": item.usuarioMovimentacao.nome
+      }
+
+      dados.push(linha);
+    });
+
+    if (dados.length === 0) {
+      var linha = {
+        "Data da movimentação": "",
+        "Local de origem": "",
+        "Local de destino": "",
+        "Material": "",
+        "Quantidade": "",
+        "Usuário": ""
+      }
+
+      dados.push(linha);
+    }
+    
+    this.excelService.exportAsExcelFile(dados, "movimentacoes");
   }
 
 }

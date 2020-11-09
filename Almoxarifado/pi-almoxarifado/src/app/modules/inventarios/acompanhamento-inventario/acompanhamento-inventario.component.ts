@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { AcompanhamentoInventarioService } from './acompanhamento-inventario.service';
+import { ExcelService } from 'src/app/shared/services/excel/excel.service';
 
 @Component({
   selector: 'app-acompanhamento-inventario',
@@ -20,7 +21,8 @@ export class AcompanhamentoInventarioComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private acompanhamentoInventarioService: AcompanhamentoInventarioService
+    private acompanhamentoInventarioService: AcompanhamentoInventarioService,
+    private excelService: ExcelService
   ) { }
 
   ngOnInit(): void {
@@ -94,6 +96,36 @@ export class AcompanhamentoInventarioComponent implements OnInit {
       this.dataSource = new MatTableDataSource<PeriodicElement>(this.inventarios);
       this.dataSource.paginator = this.paginator;
     });
+  }
+
+  public exportarExcel() {
+    var dados = [];
+
+    this.dataSource.filteredData.forEach(item => {
+      var linha = {
+        "Descrição": item.descricao,
+        "Status": item.statusInventario.descricao,
+        "Usuário": item.usuarioCriacao ? item.usuarioCriacao.nome : "",
+        "Data de início": this.formatarData(item.dataInicio),
+        "Data de fim": item.dataFim ? this.formatarData(item.dataFim) : ""
+      }
+
+      dados.push(linha);
+    });
+
+    if (dados.length === 0) {
+      var linha = {
+        "Descrição": "",
+        "Status": "",
+        "Usuário": "",
+        "Data de início": "",
+        "Data de fim": ""
+      }
+
+      dados.push(linha);
+    }
+    
+    this.excelService.exportAsExcelFile(dados, "inventarios");
   }
   
 }
