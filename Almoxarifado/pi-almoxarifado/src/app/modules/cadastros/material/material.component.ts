@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModeloService } from '../modelo/modelo.service';
 import { MarcaService } from '../marca/marca.service';
 import { MaterialService } from './material.service';
+import { ExcelService } from 'src/app/shared/services/excel/excel.service';
 
 @Component({
   selector: 'app-material',
@@ -34,7 +35,8 @@ export class MaterialComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modeloService: ModeloService,
-    private materialService: MaterialService
+    private materialService: MaterialService,
+    private excelService: ExcelService
   ) { }
 
   ngOnInit(): void {
@@ -209,6 +211,35 @@ export class MaterialComponent implements OnInit {
         }
       });
     });
+  }
+
+
+  public exportarExcel() {
+    var dados = [];
+
+    this.dataSource.filteredData.forEach(item => {
+      var linha = {
+        "Código": item.codigo,
+        "Nome": item.nome,
+        "Marca": item.modelo.marca.nome,
+        "Modelo": item.modelo.nome
+      }
+
+      dados.push(linha);
+    });
+
+    if (dados.length === 0) {
+      var linha = {
+        "Código": "",
+        "Nome": "",
+        "Marca": "",
+        "Modelo": ""
+      }
+
+      dados.push(linha);
+    }
+    
+    this.excelService.exportAsExcelFile(dados, "materiais");
   }
 
 }

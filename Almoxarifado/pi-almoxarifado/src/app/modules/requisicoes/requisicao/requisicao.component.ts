@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ExcelService } from 'src/app/shared/services/excel/excel.service';
 import { RequisicaoService } from './requisicao.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class RequisicaoComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private requisicaoService: RequisicaoService
+    private requisicaoService: RequisicaoService,
+    private excelService: ExcelService
   ) { }
 
 
@@ -122,6 +124,39 @@ export class RequisicaoComponent implements OnInit {
     const mo = new Intl.DateTimeFormat('pt', { month: '2-digit' }).format(d);
     const da = new Intl.DateTimeFormat('pt', { day: '2-digit' }).format(d);
     return `${da}/${mo}/${ye}`;
+  }
+
+
+  public exportarExcel() {
+    var dados = [];
+
+    this.dataSource.filteredData.forEach(item => {
+      var linha = {
+        "Número": item.id,
+        "Status": item.statusRequisicao.descricao,
+        "Data da requisição": this.formatarData(item.dataSolicitacao),
+        "Solicitante": item.solicitante.nome,
+        "Data do atendimento": item.dataAtendimento ? this.formatarData(item.dataAtendimento) : "",
+        "Atendente": item.atendente ? item.atendente.nome : ""
+      }
+
+      dados.push(linha);
+    });
+
+    if (dados.length === 0) {
+      var linha = {
+        "Número": "",
+        "Status": "",
+        "Data da requisição": "",
+        "Solicitante": "",
+        "Data do atendimento": "",
+        "Atendente": ""
+      }
+
+      dados.push(linha);
+    }
+    
+    this.excelService.exportAsExcelFile(dados, "requisicoes");
   }
 
 

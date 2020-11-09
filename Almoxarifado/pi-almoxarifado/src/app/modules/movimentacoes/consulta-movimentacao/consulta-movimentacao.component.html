@@ -18,7 +18,7 @@
                     <div class="card-header">
                         <form>
                             <div class="form-group">
-                                <label for="nomeMaterial">Nome do Material:</label>
+                                <label for="nomeMaterial">Material:</label>
                                 <input type="text" class="form-control" id="nomeMaterial" (keyup)="filtrarPorMaterial($event.target.value)"/>
                             </div>
                             <div class="form-group">
@@ -34,7 +34,7 @@
                                 <input type="text" class="form-control" id="dataMovimentacao" (keyup)="filtrarPorDataMovimentacao($event.target.value)"/>
                             </div>
                             <div class="form-group">
-                                <label for="quantidade">Quantidade do Material:</label>
+                                <label for="quantidade">Quantidade:</label>
                                 <input type="text" class="form-control" id="quantidade" (keyup)="filtrarPorQuantidade($event.target.value)"/>
                             </div>
                             <div class="form-group">
@@ -43,6 +43,14 @@
                             </div>
                             
                         </form>
+
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="btn btn-primary btn-lg" (click)="exportarExcel()">
+                                    Exportar dados
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card-body">
@@ -72,7 +80,7 @@
                                         </ng-container>
 
                                         <ng-container matColumnDef="quantidade">
-                                            <th mat-header-cell *matHeaderCellDef>Quantidade do Material</th>
+                                            <th mat-header-cell *matHeaderCellDef>Quantidade</th>
                                             <td mat-cell *matCellDef="let element">{{ element.quantidade }}</td>
                                         </ng-container>
 
