@@ -121,6 +121,14 @@
                                 <input type="text" class="form-control" id="filtroModelo" (keyup)="filtrarPorModelo($event.target.value)"/>
                             </div>
                         </form>
+
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="btn btn-primary btn-lg" (click)="exportarExcel()">
+                                    Exportar dados
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card-body">
