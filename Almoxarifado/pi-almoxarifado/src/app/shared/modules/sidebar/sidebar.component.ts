@@ -32,7 +32,7 @@ export class SidebarComponent implements OnInit {
       var links = sideBarItem.getElementsByTagName("a");
 
       Array.from(links).forEach(link => {
-        if (link.href === currentResource) {
+        if (link.href == currentResource) {
           if (link.classList.contains("sidebar-link")) {
             this.setActive(sideBarItem);
             
